@@ -1,11 +1,10 @@
-import pkg from '@prisma/client'
-const { PrismaClient } = pkg
-const prisma = new PrismaClient()
-// prisma.$connect()
-// try {
-//     const getconnect = async () => await prisma.$connect()
-//     getconnect()
-// } catch (error) {
-//     console.log(error)
-// }
-export default prisma
+import { PrismaClient } from '@prisma/client';
+
+export let prisma: PrismaClient;
+export function connectDb(): void {
+  prisma = new PrismaClient();
+}
+
+export async function disconnectDB(): Promise<void> {
+  await prisma?.$disconnect();
+}
